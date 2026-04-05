@@ -58,9 +58,9 @@ export default function Pricing() {
               <p style={{ color: '#666', marginBottom: '30px', lineHeight: 1.6 }}>{plan.desc}</p>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '10px' }}>
-                <span style={{ fontSize: '1rem', color: '#888' }}>from</span>
-                <span style={{ fontSize: '3rem', color: '#111', fontWeight: 700, letterSpacing: '-1px' }}>{plan.currency}{plan.price}</span>
-                <span style={{ fontSize: '1rem', color: '#888' }}>/ Project</span>
+                <span className="pricing-per" style={{ fontSize: '1rem', color: '#888' }}>from</span>
+                <span className="pricing-amount" style={{ fontSize: '3rem', color: '#111', fontWeight: 700, letterSpacing: '-1px' }}>{plan.currency}{plan.price}</span>
+                <span className="pricing-per" style={{ fontSize: '1rem', color: '#888' }}>/ Project</span>
               </div>
 
               <ul className="pricing-features">

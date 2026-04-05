@@ -47,13 +47,13 @@ export default function Hero() {
             <span className="first-name">
               <motion.span variants={letterVariants} className="greeting">
                 <span className="greeting-line"></span>
-                Hello My Name Is
+                Hello <span className="greeting-bold">My Name</span> Is
               </motion.span>
+              <motion.span className="name-divider" variants={lineVariants} />
               {name1.map((char, index) => (
                 <motion.span key={index} variants={letterVariants} className="hero-letter">{char}</motion.span>
               ))}
             </span>
-            <motion.div className="name-divider" variants={lineVariants} />
             <span className="last-name">
               {name2.map((char, index) => (
                 <motion.span key={index} variants={letterVariants} className="hero-letter">{char}</motion.span>

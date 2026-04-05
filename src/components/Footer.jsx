@@ -21,7 +21,6 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
            <p>&copy; Code Terminal 2026</p>
-           <a href="#home" className="back-to-top magnetic-element">Back to top</a>
         </div>
       </div>
     </footer>

@@ -32,7 +32,7 @@ export default function WhatYouGet() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            style={{ marginTop: '30px', fontSize: '1.2rem', color: '#A1A1A1', maxWidth: '600px', margin: '30px auto 0', lineHeight: 1.7 }}
+            style={{ fontSize: '1.2rem', color: '#A1A1A1', maxWidth: '600px', margin: '15px auto 0', lineHeight: 1.7 }}
           >
             I'm a full stack developer passionate about building performant, scalable, and user-friendly digital products.
           </motion.p>

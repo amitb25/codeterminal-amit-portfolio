@@ -19,6 +19,7 @@ function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(true);
   const [cursorVariant, setCursorVariant] = useState('default');
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     // Preloader timer
@@ -68,9 +69,20 @@ function App() {
       el.addEventListener('mouseleave', leaveHover);
     });
 
+    // Back to top visibility
+    const handleScroll = () => {
+      const servicesEl = document.getElementById('services');
+      if (servicesEl) {
+        const rect = servicesEl.getBoundingClientRect();
+        setShowBackToTop(rect.top <= 0);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
       lenis.destroy();
       magneticElements.forEach(el => {
@@ -156,6 +168,21 @@ function App() {
           </main>
         </motion.div>
       )}
+
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.a
+            href="#home"
+            className="back-to-top-float"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+          </motion.a>
+        )}
+      </AnimatePresence>
     </>
   );
 }

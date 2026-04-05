@@ -9,7 +9,7 @@ function SkillBar({ skill, index }) {
   return (
     <div ref={ref} style={{ marginBottom: '35px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', alignItems: 'baseline' }}>
-        <span style={{ fontSize: '1.25rem', fontWeight: 500, letterSpacing: '-0.3px' }}>{skill.name}</span>
+        <span className="skill-name" style={{ fontSize: '1.25rem', fontWeight: 500, letterSpacing: '-0.3px' }}>{skill.name}</span>
         <motion.span
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -33,10 +33,10 @@ function SkillBar({ skill, index }) {
 
 export default function Skills() {
   const skills = [
-    { name: 'React / Next.js', fill: '92%' },
+    { name: 'Laravel / PHP', fill: '92%' },
+    { name: 'React / Next.js', fill: '88%' },
     { name: 'React Native', fill: '84%' },
     { name: 'Node.js / Express', fill: '88%' },
-    { name: 'Laravel / PHP', fill: '82%' },
     { name: 'Supabase / MongoDB / PostgreSQL', fill: '85%' },
     { name: 'Vercel / Railway / Render / Hostinger', fill: '80%' },
     { name: 'AI Tools (Claude / Cursor / Antigravity)', fill: '90%' },
@@ -50,7 +50,7 @@ export default function Skills() {
           TECH STACK
         </motion.div>
 
-        <div style={{ marginTop: '40px', maxWidth: '800px' }}>
+        <div className="skills-list" style={{ marginTop: '40px', maxWidth: '800px' }}>
           {skills.map((skill, i) => (
             <SkillBar key={i} skill={skill} index={i} />
           ))}

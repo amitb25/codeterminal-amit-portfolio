@@ -12,7 +12,16 @@ const reviews = [
 export default function Testimonials() {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
-  const totalPages = Math.ceil(reviews.length / 2);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const perPage = isMobile ? 1 : 2;
+  const totalPages = Math.ceil(reviews.length / perPage);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -32,7 +41,7 @@ export default function Testimonials() {
     setPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const pair = reviews.slice(page * 2, page * 2 + 2);
+  const pair = reviews.slice(page * perPage, page * perPage + perPage);
 
   const variants = {
     enter: (dir) => ({ x: dir > 0 ? 300 : -300, opacity: 0 }),

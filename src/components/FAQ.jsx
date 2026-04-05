@@ -19,7 +19,7 @@ export default function FAQ() {
           FAQs
         </motion.div>
 
-        <div style={{ marginTop: '40px', maxWidth: '800px' }}>
+        <div className="faq-list" style={{ marginTop: '40px', maxWidth: '800px' }}>
           {faqs.map((faq, i) => (
             <motion.div
               key={i}

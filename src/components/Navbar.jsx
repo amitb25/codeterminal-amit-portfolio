@@ -48,7 +48,7 @@ export default function Navbar() {
         </div>
         <div className="nav-right">
           <button className={`menu-btn${isOpen ? ' menu-btn-active' : ''}`} aria-label="Menu" onClick={toggleDrawer}>
-            <LayoutGrid size={20} />
+            <LayoutGrid size={20} fill={isOpen ? 'currentColor' : 'none'} />
           </button>
         </div>
       </motion.nav>

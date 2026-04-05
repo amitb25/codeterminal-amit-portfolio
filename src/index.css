@@ -18,15 +18,22 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow: clip;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+html.lenis .lenis-content {
+  height: auto;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  overflow-x: hidden;
+  overflow-x: clip;
   line-height: 1.6;
   cursor: none;
 }
@@ -48,8 +55,16 @@ a, button {
 }
 
 #root {
-  overflow-x: hidden;
   width: 100%;
+}
+
+.app-content-fade {
+  animation: fadeInApp 0.6s ease 0.2s both;
+}
+
+@keyframes fadeInApp {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 img {
@@ -67,13 +82,22 @@ img {
 .section-dark {
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  padding: 70px 0;
+  padding: 35px 0;
+}
+
+.what-you-get.section-dark {
+  padding-bottom: 0;
+  padding-top: 30px;
+}
+
+.what-you-get .section-label {
+  margin-bottom: 0.5rem;
 }
 
 .section-light {
   background-color: var(--bg-light);
   color: var(--text-dark);
-  padding: 70px 0;
+  padding: 40px 0;
 }
 
 .section-label {
@@ -81,7 +105,7 @@ img {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   border: 1px solid var(--border-dark);
   display: inline-block;
   padding: 5px 15px;
@@ -106,7 +130,7 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 0 16px 0 16px;
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -204,12 +228,14 @@ img {
 
 .menu-btn-active svg {
   transform: rotate(45deg);
-  transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+
 .menu-btn svg {
-  transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+
 
 .menu-btn-active:hover {
   background: #e0e0e0;
@@ -400,8 +426,9 @@ img {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   padding-top: 90px;
+  padding-bottom: 5px;
 }
 
 .hero-bg {
@@ -410,6 +437,14 @@ img {
   z-index: -1;
   background: #000;
   overflow: hidden;
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
 }
 
 /* Floating 3D orbs */
@@ -605,7 +640,7 @@ img {
   mix-blend-mode: screen;
   filter: contrast(1.2) brightness(0.95);
   transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: none;
 }
 
@@ -644,7 +679,7 @@ img {
   align-items: center;
   padding: 40px 0;
   border-top: 1px solid var(--border-dark);
-  margin-top: 40px;
+  margin-top: 0;
 }
 
 .scroll-ind {
@@ -750,7 +785,8 @@ img {
   width: 100%;
   background-color: var(--bg-dark);
   border-bottom: 1px solid var(--border-dark);
-  padding: 20px 0;
+  padding: 0;
+  margin-top: -10px;
   position: relative;
 }
 
@@ -844,7 +880,7 @@ img {
 .section-heading {
   font-size: clamp(2rem, 4vw, 3.5rem);
   max-width: 800px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   line-height: 1.1;
   letter-spacing: -1px;
 }
@@ -1022,7 +1058,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .service-desc {
@@ -1033,11 +1069,11 @@ img {
 }
 
 .services-list-new {
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .service-row-new {
-  padding: 35px 0;
+  padding: 18px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   cursor: none;
   transition: padding-left 0.4s ease;
@@ -1133,14 +1169,25 @@ img {
 }
 
 .portfolio-card-wrapper {
-  position: sticky;
-  top: 0;
   height: 100vh;
   margin-bottom: 0;
 }
 
 .portfolio-card-wrapper:not(:last-child) {
   margin-bottom: 5vh;
+}
+
+/* Desktop stacking cards */
+.pf-stack-card {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 5%;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
 }
 
 .portfolio-card {
@@ -1169,7 +1216,7 @@ img {
 
 .portfolio-top {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 
 .portfolio-label {
@@ -2009,6 +2056,7 @@ img {
     flex-direction: column;
     gap: 30px;
     text-align: center;
+    margin-top: 40px;
     padding-top: 20px;
     padding-bottom: 15px;
   }

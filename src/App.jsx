@@ -146,11 +146,7 @@ function App() {
       <div className="noise-overlay" />
 
       {!loading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <div className="app-content-fade">
           <Navbar />
           <main>
             <Hero />
@@ -166,7 +162,7 @@ function App() {
             <FAQ />
             <Footer />
           </main>
-        </motion.div>
+        </div>
       )}
 
       <AnimatePresence>

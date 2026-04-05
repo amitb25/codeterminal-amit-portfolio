@@ -60,7 +60,7 @@ export default function Services() {
         <motion.div
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}
           className="section-header-split"
-          style={{ paddingBottom: '60px', borderBottom: '1px solid rgba(0,0,0,0.1)' }}
+          style={{ paddingBottom: '25px', borderBottom: '1px solid rgba(0,0,0,0.1)' }}
         >
           <div>
             <div className="section-label black">SERVICES</div>

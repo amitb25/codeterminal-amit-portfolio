@@ -32,6 +32,7 @@ export default function Hero() {
   return (
     <header className="hero" id="home">
       <div className="hero-bg">
+        <video className="hero-bg-video" src="/background.mp4" autoPlay loop muted playsInline />
         <div className="hero-bg-grid"></div>
         <div className="hero-bg-orb"></div>
       </div>
@@ -46,7 +47,6 @@ export default function Hero() {
           <h1 className="hero-title">
             <span className="first-name">
               <motion.span variants={letterVariants} className="greeting">
-                <span className="greeting-line"></span>
                 Hello <span className="greeting-bold">My Name</span> Is
               </motion.span>
               <motion.span className="name-divider" variants={lineVariants} />

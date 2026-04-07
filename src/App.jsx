@@ -107,7 +107,7 @@ function App() {
             <Numeric />
             <Testimonials />
             <Skills />
-            <Pricing />
+            {/* <Pricing /> */}
             <FAQ />
             <Footer />
           </main>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
@@ -8,7 +9,7 @@ const projects = [
     client: 'ShopEase',
     tags: ['React', 'Node.js', 'MongoDB'],
     image: '/work1.jpg',
-    bg: '#0a0a0a',
+    bg: '#000000',
   },
   {
     title: 'Task Management App',
@@ -28,9 +29,48 @@ const projects = [
   },
 ];
 
-function CardContent({ project }) {
+function WhatYouGetHeader() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      style={{ textAlign: 'center', marginBottom: '30px', paddingTop: '40px' }}
+    >
+      <div className="section-label" style={{ marginBottom: '10px' }}>WHAT YOU GET</div>
+      <h2 style={{
+        fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+        lineHeight: 1.1,
+        maxWidth: '900px',
+        margin: '0 auto',
+        background: 'linear-gradient(135deg, var(--accent) 0%, #d4ff80 50%, var(--accent) 100%)',
+        backgroundSize: '200% 200%',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        animation: 'shimmer-text 3s ease-in-out infinite',
+        letterSpacing: '-1px'
+      }}>
+        Transforming Ideas into<br /> Powerful Web Applications
+      </h2>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+        style={{ fontSize: '1.2rem', color: '#A1A1A1', maxWidth: '600px', margin: '15px auto 0', lineHeight: 1.7, paddingBottom: 0 }}
+      >
+        I'm a full stack developer passionate about building performant, scalable, and user-friendly digital products.
+      </motion.p>
+    </motion.div>
+  );
+}
+
+function CardContent({ project, isFirst }) {
   return (
     <>
+      {isFirst && <WhatYouGetHeader />}
       <div className="portfolio-glow"></div>
       <div className="portfolio-top">
         <span className="portfolio-label">MY WORK</span>
@@ -65,28 +105,6 @@ function CardContent({ project }) {
 }
 
 export default function Portfolio() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 900);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  if (isMobile) {
-    return (
-      <section className="portfolio-section" id="portfolio">
-        {projects.map((project, i) => (
-          <div key={i} className="portfolio-card-wrapper">
-            <div className="portfolio-card">
-              <CardContent project={project} />
-            </div>
-          </div>
-        ))}
-      </section>
-    );
-  }
-
   return (
     <section className="portfolio-section" id="portfolio">
       {projects.map((project, i) => (
@@ -95,7 +113,7 @@ export default function Portfolio() {
           className="pf-stack-card"
           style={{ zIndex: i + 1, background: project.bg }}
         >
-          <CardContent project={project} />
+          <CardContent project={project} isFirst={i === 0} />
         </div>
       ))}
     </section>

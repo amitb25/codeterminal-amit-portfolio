@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const plans = [
   {
@@ -35,7 +35,64 @@ const plans = [
   }
 ];
 
+function PlanCard({ plan, i }) {
+  return (
+    <motion.div
+      key={plan.name}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="pricing-card"
+    >
+      <div className="tag black-tag" style={{ display: 'inline-block', marginBottom: '20px' }}>{plan.tag}</div>
+      <h3 style={{ fontSize: '2.2rem', marginBottom: '16px', color: '#111', fontWeight: 600, letterSpacing: '-0.5px' }}>{plan.name}</h3>
+      <p style={{ color: '#666', marginBottom: '30px', lineHeight: 1.6 }}>{plan.desc}</p>
+
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '10px' }}>
+        <span className="pricing-per" style={{ fontSize: '1rem', color: '#888' }}>from</span>
+        <span className="pricing-amount" style={{ fontSize: '3rem', color: '#111', fontWeight: 700, letterSpacing: '-1px' }}>{plan.currency}{plan.price}</span>
+        <span className="pricing-per" style={{ fontSize: '1rem', color: '#888' }}>/ Project</span>
+      </div>
+
+      <ul className="pricing-features">
+        {plan.features.map((feature, j) => (
+          <motion.li
+            key={feature}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: j * 0.08 + 0.2 }}
+          >
+            {feature}
+          </motion.li>
+        ))}
+      </ul>
+
+      <motion.a
+        href="#contact"
+        className="btn btn-dark magnetic-element"
+        style={{ marginTop: '35px', background: '#111' }}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        Get Started
+        <span className="btn-icon" style={{ background: 'var(--accent)', color: '#000' }}>&rarr;</span>
+      </motion.a>
+    </motion.div>
+  );
+}
+
 export default function Pricing() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+  const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className="pricing section-light" id="pricing">
       <div className="container">
@@ -43,53 +100,38 @@ export default function Pricing() {
           PRICING PLAN
         </motion.div>
 
-        <div className="pricing-grid">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="pricing-card"
-            >
-              <div className="tag black-tag" style={{ display: 'inline-block', marginBottom: '20px' }}>{plan.tag}</div>
-              <h3 style={{ fontSize: '2.2rem', marginBottom: '16px', color: '#111', fontWeight: 600, letterSpacing: '-0.5px' }}>{plan.name}</h3>
-              <p style={{ color: '#666', marginBottom: '30px', lineHeight: 1.6 }}>{plan.desc}</p>
-
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '10px' }}>
-                <span className="pricing-per" style={{ fontSize: '1rem', color: '#888' }}>from</span>
-                <span className="pricing-amount" style={{ fontSize: '3rem', color: '#111', fontWeight: 700, letterSpacing: '-1px' }}>{plan.currency}{plan.price}</span>
-                <span className="pricing-per" style={{ fontSize: '1rem', color: '#888' }}>/ Project</span>
-              </div>
-
-              <ul className="pricing-features">
-                {plan.features.map((feature, j) => (
-                  <motion.li
-                    key={feature}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: j * 0.08 + 0.2 }}
-                  >
-                    {feature}
-                  </motion.li>
-                ))}
-              </ul>
-
-              <motion.a
-                href="#contact"
-                className="btn btn-dark magnetic-element"
-                style={{ marginTop: '35px', background: '#111' }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+        {isMobile ? (
+          <>
+            <div className="pricing-tabs">
+              {plans.map((plan, i) => (
+                <button
+                  key={plan.name}
+                  className={`pricing-tab${activeTab === i ? ' pricing-tab-active' : ''}`}
+                  onClick={() => setActiveTab(i)}
+                >
+                  {plan.name}
+                </button>
+              ))}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.3 }}
               >
-                Get Started
-                <span className="btn-icon" style={{ background: 'var(--accent)', color: '#000' }}>&rarr;</span>
-              </motion.a>
-            </motion.div>
-          ))}
-        </div>
+                <PlanCard plan={plans[activeTab]} i={0} />
+              </motion.div>
+            </AnimatePresence>
+          </>
+        ) : (
+          <div className="pricing-grid">
+            {plans.map((plan, i) => (
+              <PlanCard key={plan.name} plan={plan} i={i} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

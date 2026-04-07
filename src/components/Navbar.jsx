@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LayoutGrid, X, Home, Briefcase, Layers, Eye, FolderOpen, Hash, MessageSquare, Grid3X3, Tag, HelpCircle, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 const menuItems = [
   { label: 'HOME', href: '#home', icon: <Home size={16} /> },

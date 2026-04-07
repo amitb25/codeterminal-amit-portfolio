@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Marquee from './components/Marquee';
 import Experience from './components/Experience';
 import Services from './components/Services';
-import WhatYouGet from './components/WhatYouGet';
 import Portfolio from './components/Portfolio';
 import Numeric from './components/Numeric';
 import Testimonials from './components/Testimonials';
@@ -16,9 +15,7 @@ import Footer from './components/Footer';
 import Lenis from 'lenis';
 
 function App() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(true);
-  const [cursorVariant, setCursorVariant] = useState('default');
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
@@ -37,38 +34,6 @@ function App() {
     }
     requestAnimationFrame(raf);
 
-    // Mouse position
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-
-    // Magnetic button effect
-    const magneticElements = document.querySelectorAll('.magnetic-element');
-    const handleMagneticMove = (e) => {
-      const el = e.currentTarget;
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-    };
-    const handleMagneticLeave = (e) => {
-      e.currentTarget.style.transform = 'translate(0, 0)';
-    };
-
-    magneticElements.forEach(el => {
-      el.addEventListener('mousemove', handleMagneticMove);
-      el.addEventListener('mouseleave', handleMagneticLeave);
-    });
-
-    // Cursor grow on hoverable elements
-    const hoverTargets = document.querySelectorAll('a, button, .work-item, .premium-card');
-    const enterHover = () => setCursorVariant('hover');
-    const leaveHover = () => setCursorVariant('default');
-    hoverTargets.forEach(el => {
-      el.addEventListener('mouseenter', enterHover);
-      el.addEventListener('mouseleave', leaveHover);
-    });
-
     // Back to top visibility
     const handleScroll = () => {
       const servicesEl = document.getElementById('services');
@@ -79,20 +44,10 @@ function App() {
     };
     window.addEventListener('scroll', handleScroll);
 
-    window.addEventListener('mousemove', handleMouseMove);
     return () => {
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
       lenis.destroy();
-      magneticElements.forEach(el => {
-        el.removeEventListener('mousemove', handleMagneticMove);
-        el.removeEventListener('mouseleave', handleMagneticLeave);
-      });
-      hoverTargets.forEach(el => {
-        el.removeEventListener('mouseenter', enterHover);
-        el.removeEventListener('mouseleave', leaveHover);
-      });
     };
   }, [loading]);
 
@@ -134,15 +89,6 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* Custom Cursor */}
-      <div
-        className={`cursor-dot ${cursorVariant === 'hover' ? 'cursor-hover' : ''}`}
-        style={{ left: mousePos.x, top: mousePos.y }}
-      />
-      <div
-        className={`cursor-outline ${cursorVariant === 'hover' ? 'cursor-outline-hover' : ''}`}
-        style={{ left: mousePos.x, top: mousePos.y, transition: 'all 0.15s ease-out' }}
-      />
       <div className="noise-overlay" />
 
       {!loading && (
@@ -153,7 +99,6 @@ function App() {
             <Marquee />
             <Experience />
             <Services />
-            <WhatYouGet />
             <Portfolio />
             <Numeric />
             <Testimonials />

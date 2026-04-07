@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -105,15 +105,33 @@ function CardContent({ project, isFirst }) {
 }
 
 export default function Portfolio() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className="portfolio-section" id="portfolio">
+      {/* Mobile: separate card for WHAT YOU GET */}
+      {isMobile && (
+        <div
+          className="pf-stack-card"
+          style={{ zIndex: 1, background: '#000000' }}
+        >
+          <WhatYouGetHeader />
+        </div>
+      )}
+
       {projects.map((project, i) => (
         <div
           key={i}
           className="pf-stack-card"
-          style={{ zIndex: i + 1, background: project.bg }}
+          style={{ zIndex: isMobile ? i + 2 : i + 1, background: project.bg }}
         >
-          <CardContent project={project} isFirst={i === 0} />
+          <CardContent project={project} isFirst={!isMobile && i === 0} />
         </div>
       ))}
     </section>

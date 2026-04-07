@@ -22,17 +22,21 @@ function App() {
     // Preloader timer
     const timer = setTimeout(() => setLoading(false), 2200);
 
-    // Smooth scrolling
-    const lenis = new Lenis({
-      lerp: 0.05,
-      smoothWheel: true,
-    });
+    // Smooth scrolling — only on desktop (touch devices use native scroll)
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    let lenis = null;
+    if (!isTouchDevice) {
+      lenis = new Lenis({
+        lerp: 0.05,
+        smoothWheel: true,
+      });
 
-    function raf(time) {
-      lenis.raf(time);
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
 
     // Back to top visibility
     const handleScroll = () => {
@@ -47,7 +51,7 @@ function App() {
     return () => {
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
-      lenis.destroy();
+      if (lenis) lenis.destroy();
     };
   }, [loading]);
 

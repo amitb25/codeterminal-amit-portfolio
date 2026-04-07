@@ -36,7 +36,7 @@ function WhatYouGetHeader() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      style={{ textAlign: 'center', marginBottom: '30px', paddingTop: '40px' }}
+      style={{ textAlign: 'center', marginBottom: '30px', paddingTop: '0' }}
     >
       <div className="section-label" style={{ marginBottom: '10px' }}>WHAT YOU GET</div>
       <h2 style={{

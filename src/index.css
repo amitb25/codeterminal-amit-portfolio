@@ -1074,7 +1074,7 @@ img {
 
 .service-row-new {
   padding: 18px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: padding-left 0.4s ease;
 }
@@ -1087,7 +1087,7 @@ img {
   font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--accent);
   margin-bottom: 20px;
   letter-spacing: 1px;
 }
@@ -1102,15 +1102,15 @@ img {
 }
 
 .service-title-active {
-  color: #111;
+  color: #fff;
 }
 
 .service-title-inactive {
-  color: rgba(0, 0, 0, 0.12);
+  color: rgba(255, 255, 255, 0.12);
 }
 
 .service-row-new:hover .service-title-inactive {
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.25);
 }
 
 .service-row-details {
@@ -1128,12 +1128,12 @@ img {
 .service-tag-new {
   padding: 6px 18px;
   border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #333;
+  color: #ccc;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1147,7 +1147,7 @@ img {
 .service-row-desc {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #555;
+  color: #A1A1A1;
   max-width: 600px;
 }
 
@@ -1567,9 +1567,9 @@ img {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   background: transparent;
-  color: #333;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1578,8 +1578,9 @@ img {
 }
 
 .testi-arrow:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .testi-slider-wrap {
@@ -1606,13 +1607,14 @@ img {
 }
 
 .testimonial-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
   padding: 40px 35px;
   border-radius: 28px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px);
 }
 
 .testimonial-card::before {
@@ -1658,7 +1660,7 @@ img {
 
 .testimonial-text {
   font-size: 1.1rem;
-  color: #222;
+  color: #ccc;
   line-height: 1.8;
   margin-bottom: 35px;
   position: relative;
@@ -1698,7 +1700,7 @@ img {
 .testimonial-author-name {
   margin: 0;
   font-size: 1rem;
-  color: #111;
+  color: #fff;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -1729,7 +1731,7 @@ img {
   height: 8px;
   border-radius: 50%;
   border: none;
-  background: #ddd;
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: all 0.4s ease;
 }
@@ -2224,12 +2226,17 @@ img {
 
   .pf-stack-card {
     height: auto;
-    min-height: 55vh;
+    min-height: 65vh;
     padding: 25px 5%;
+    top: 70px;
   }
 
   .pf-stack-card:first-child {
-    min-height: 100vh;
+    min-height: 50vh;
+  }
+
+  .pf-stack-card:last-child {
+    padding-bottom: 80px;
   }
 
   .portfolio-top {

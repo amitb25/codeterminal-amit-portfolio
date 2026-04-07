@@ -50,10 +50,10 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="testimonials section-light" id="testimonials">
+    <section className="testimonials section-dark" id="testimonials">
       <div className="container">
         <div className="testi-header">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="section-label black">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="section-label">
             TESTIMONIALS
           </motion.div>
           <div className="testi-nav-arrows">

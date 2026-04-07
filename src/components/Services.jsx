@@ -55,18 +55,18 @@ export default function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="services section-light" id="services">
+    <section className="services section-dark" id="services">
       <div className="container">
         <motion.div
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}
           className="section-header-split"
-          style={{ paddingBottom: '25px', borderBottom: '1px solid rgba(0,0,0,0.1)' }}
+          style={{ paddingBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}
         >
           <div>
-            <div className="section-label black">SERVICES</div>
+            <div className="section-label">SERVICES</div>
           </div>
           <div>
-            <p className="service-desc" style={{ fontSize: '1.1rem', color: '#333' }}>
+            <p className="service-desc" style={{ fontSize: '1.1rem', color: '#A1A1A1' }}>
               I'm a full stack developer building end-to-end web applications with clean code and scalable architecture.
             </p>
           </div>
